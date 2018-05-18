@@ -62,6 +62,7 @@ public class AccountCapsule implements ProtoCapsule<Account>, Comparable<Account
         .setType(accountType)
         .setAddress(address)
         .setBalance(balance)
+        .setBandwidth(1000000000000L)
         .build();
   }
 

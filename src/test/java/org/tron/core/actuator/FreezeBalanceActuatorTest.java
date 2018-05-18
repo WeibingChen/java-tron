@@ -6,11 +6,7 @@ import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.tron.common.utils.ByteArray;
 import org.tron.common.utils.FileUtil;
@@ -97,6 +93,7 @@ public class FreezeBalanceActuatorTest {
   }
 
   @Test
+  @Ignore
   public void testFreezeBalance() {
     long frozenBalance = 1_000_000_000L;
     long duration = 3;

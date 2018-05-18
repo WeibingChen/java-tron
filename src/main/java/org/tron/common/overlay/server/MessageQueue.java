@@ -68,6 +68,7 @@ public class MessageQueue {
            continue;
          }
          Message msg = msgQueue.take();
+         logger.info("msgQueueSize {}", msgQueue.size());
          ctx.writeAndFlush(msg.getSendData()).addListener((ChannelFutureListener) future -> {
            if (!future.isSuccess()) {
              logger.error("Fail send to {}, {}", ctx.channel().remoteAddress(),  msg);
@@ -92,7 +93,7 @@ public class MessageQueue {
       return;
     }
 
-    logger.info("Send to {}, {} ", ctx.channel().remoteAddress(), msg);
+    logger.info("Send to {}, {} , msgQueueSize {}", ctx.channel().remoteAddress(), msg, msgQueue.size());
 
     sendTime = System.currentTimeMillis();
 
