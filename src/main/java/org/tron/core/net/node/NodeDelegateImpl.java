@@ -68,18 +68,18 @@ public class NodeDelegateImpl implements NodeDelegate {
 
       if (!syncMode) {
         logger.info("zhangheng preValidate usetime is {}", end1 - start1);
-        if(end1-start1>1500){
+        if (end1 - start1 > 1500) {
           logger.info("zhangheng all stackTraces111");
-          allStackTraces1.forEach((t,s)->{
-            logger.info("zhangheng ,Thread is {}.StackTrace is {}",t,s);
+          allStackTraces1.forEach((t, s) -> {
+            logger.info("zhangheng ,Thread is {}.StackTrace is {}", t, s);
           });
 
         }
         logger.info("zhangheng pushBlock usetime is {}", end2 - start2);
-        if(end2-start2>2000){
+        if (end2 - start2 > 2000) {
           logger.info("zhangheng all stackTraces222");
-          allStackTraces2.forEach((t,s)->{
-            logger.info("zhangheng ,Thread is {}.StackTrace is {}",t,s);
+          allStackTraces2.forEach((t, s) -> {
+            logger.info("zhangheng ,Thread is {}.StackTrace is {}", t, s);
           });
 
         }
