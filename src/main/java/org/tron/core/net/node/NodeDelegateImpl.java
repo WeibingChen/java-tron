@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.tron.common.overlay.message.Message;
@@ -56,16 +57,32 @@ public class NodeDelegateImpl implements NodeDelegate {
     }
     try {
       long start1 = System.currentTimeMillis();
+      Map<Thread, StackTraceElement[]> allStackTraces1 = Thread.getAllStackTraces();
       dbManager.preValidateTransactionSign(block);
       long end1 = System.currentTimeMillis();
 
       long start2 = System.currentTimeMillis();
+      Map<Thread, StackTraceElement[]> allStackTraces2 = Thread.getAllStackTraces();
       dbManager.pushBlock(block);
       long end2 = System.currentTimeMillis();
 
       if (!syncMode) {
         logger.info("zhangheng preValidate usetime is {}", end1 - start1);
-        logger.info("zhangheng preValidate usetime is {}", end2 - start2);
+        if(end1-start1>1500){
+          logger.info("zhangheng all stackTraces111");
+          allStackTraces1.forEach((t,s)->{
+            logger.info("zhangheng ,Thread is {}.StackTrace is {}",t,s);
+          });
+
+        }
+        logger.info("zhangheng pushBlock usetime is {}", end2 - start2);
+        if(end2-start2>2000){
+          logger.info("zhangheng all stackTraces222");
+          allStackTraces2.forEach((t,s)->{
+            logger.info("zhangheng ,Thread is {}.StackTrace is {}",t,s);
+          });
+
+        }
         List<TransactionCapsule> trx = null;
         trx = block.getTransactions();
         return trx.stream()
