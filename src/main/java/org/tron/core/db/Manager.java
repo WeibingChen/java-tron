@@ -668,7 +668,7 @@ public class Manager {
       UnLinkedBlockException, ValidateScheduleException, ValidateBandwidthException, TaposException, TooBigTransactionException, DupTransactionException, TransactionExpirationException {
 
     try (PendingManager pm = new PendingManager(this)) {
-
+      logger.info("zhangheng start push block num is {}", block.getNum());
       if (!block.generatedByMyself) {
         if (!block.validateSignature()) {
           logger.info("The siganature is not validated.");
@@ -701,6 +701,8 @@ public class Manager {
         }
       } else {
         if (newBlock.getNum() <= getDynamicPropertiesStore().getLatestBlockHeaderNumber()) {
+          logger.info(
+              "zhangheng push block newBlock.getNum() <= getDynamicPropertiesStore().getLatestBlockHeaderNumber()");
           return;
         }
         // switch fork

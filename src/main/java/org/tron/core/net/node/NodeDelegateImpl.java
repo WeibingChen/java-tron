@@ -55,9 +55,17 @@ public class NodeDelegateImpl implements NodeDelegate {
       throw new BadBlockException("block time error");
     }
     try {
+      long start1 = System.currentTimeMillis();
       dbManager.preValidateTransactionSign(block);
+      long end1 = System.currentTimeMillis();
+
+      long start2 = System.currentTimeMillis();
       dbManager.pushBlock(block);
+      long end2 = System.currentTimeMillis();
+
       if (!syncMode) {
+        logger.info("zhangheng preValidate usetime is {}", end1 - start1);
+        logger.info("zhangheng preValidate usetime is {}", end2 - start2);
         List<TransactionCapsule> trx = null;
         trx = block.getTransactions();
         return trx.stream()
